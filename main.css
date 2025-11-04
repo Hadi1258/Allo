@@ -1,0 +1,177 @@
+
+/* Global reset and overflow guard */
+*{box-sizing:border-box; min-width:0}
+html,body{margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{overflow-x:hidden}
+img,svg,video{max-width:100%; height:auto; display:block}
+:root{
+  --brand:#5B8CFF;
+  --brand-2:#6EE7F9;
+  --fg:#11131a;
+  --bg:#fbfcfe;
+  --elev:#ffffff;
+  --muted:#4b5565;
+  --card:#ffffff;
+  --border:rgba(17,19,26,.08);
+  --ring:rgba(91,140,255,.45);
+  --shadow:0 10px 40px rgba(2,8,23,.06);
+  --radius:16px;
+  --radius-lg:22px;
+  --container:1160px;
+  --space:clamp(12px, 2vw, 20px);
+  --h1:clamp(32px, 4vw, 52px);
+  --h2:clamp(22px, 3vw, 32px);
+  --h3:clamp(18px, 2.2vw, 22px);
+  --text:clamp(14px, 1.2vw, 16px);
+}
+[data-theme="dark"]{
+  --fg:#e7eaf0;
+  --bg:#0b0c10;
+  --elev:#0f1116;
+  --muted:#9aa2b2;
+  --card:#12141b;
+  --border:rgba(255,255,255,.08);
+  --shadow:0 10px 40px rgba(0,0,0,.35);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --fg:#e7eaf0;
+    --bg:#0b0c10;
+    --elev:#0f1116;
+    --muted:#9aa2b2;
+    --card:#12141b;
+    --border:rgba(255,255,255,.08);
+    --shadow:0 10px 40px rgba(0,0,0,.35);
+  }
+}
+
+/* Typography */
+body{font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Arial, Noto Sans; background:var(--bg); color:var(--fg); line-height:1.6}
+h1{font-size:var(--h1); line-height:1.15; margin:0 0 6px}
+h2{font-size:var(--h2); line-height:1.2; margin:0 0 8px}
+h3{font-size:var(--h3); line-height:1.25; margin:0 0 6px}
+p{font-size:var(--text); margin:0}
+
+/* Layout primitives */
+.container{width:min(var(--container), 92vw); margin:0 auto}
+.section{padding:calc(var(--space)*2) 0}
+.grid{display:grid; gap:var(--space)}
+.grid-12{grid-template-columns:repeat(12, 1fr)}
+.card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:clamp(14px, 1.8vw, 18px); box-shadow:var(--shadow)}
+
+/* Header with hide on scroll and mobile menu */
+.site-header{position:sticky; top:0; z-index:50; transition:transform .35s ease, background .3s ease; background:rgba(255,255,255,.7); border-bottom:1px solid var(--border); backdrop-filter:saturate(120%) blur(8px)}
+[data-theme="dark"] .site-header{background:rgba(10,11,16,.55)}
+.site-header.is-hidden{transform:translateY(-100%)}
+.navbar{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 6px}
+.brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
+.brand-logo{width:28px;height:28px;border-radius:10px;background:conic-gradient(from 20deg, var(--brand), var(--brand-2))}
+.navlinks{display:flex; gap:18px; align-items:center; font-size:15px}
+.navlinks a{color:var(--fg); text-decoration:none; opacity:.9}
+.navlinks a:hover{opacity:1}
+.theme-toggle{border:1px solid var(--border); background:transparent; padding:8px 12px; border-radius:12px; cursor:pointer}
+.menu-btn{display:none; border:1px solid var(--border); background:transparent; padding:8px 10px; border-radius:12px}
+@media(max-width:860px){
+  .menu-btn{display:inline-flex}
+  .navlinks{position:fixed; inset:auto 12px 12px 12px; top:58px; background:var(--elev); border:1px solid var(--border); border-radius:var(--radius-lg); padding:12px; display:none; flex-direction:column; box-shadow:var(--shadow)}
+  .navlinks.is-open{display:flex}
+}
+
+/* Hero with search */
+.hero{display:grid; grid-template-columns: 1.2fr .8fr; gap:var(--space); align-items:stretch}
+.hero .panel{border-radius:var(--radius-lg)}
+.hero .lead{font-size:var(--h1); font-weight:900; letter-spacing:.2px}
+.hero p.meta{color:var(--muted)}
+.hero .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+.search-wrap{display:flex; align-items:center; gap:8px}
+.search-input{flex:1; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background:var(--elev); color:var(--fg)}
+.search-extras{display:flex; gap:8px}
+.hide-on-mobile{display:flex}
+@media(max-width:860px){
+  .hero{grid-template-columns:1fr}
+  .hide-on-mobile{display:none}
+}
+
+/* Category grid two up minimum on phones */
+.category-grid{display:grid; gap:var(--space); grid-template-columns: repeat(12, 1fr)}
+.category-grid .card{padding:12px}
+.category-grid .thumb{aspect-ratio:4/3; width:100%; border-radius:12px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); margin-bottom:10px}
+@media(max-width:1024px){
+  .category-grid{grid-template-columns: repeat(6, 1fr)}
+}
+@media(max-width:640px){
+  .category-grid{grid-template-columns: repeat(4, 1fr)}
+}
+@media(max-width:480px){
+  .category-grid{grid-template-columns: repeat(2, 1fr)}
+}
+
+/* Featured carousel like row */
+.featured-row{display:grid; gap:var(--space); grid-auto-flow:column; grid-auto-columns: minmax(240px, 1fr); overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:6px}
+.featured-row .card{scroll-snap-align:start; min-width:240px}
+.featured-row::-webkit-scrollbar{height:8px}
+.featured-row::-webkit-scrollbar-thumb{background:var(--border); border-radius:999px}
+
+/* Trust section */
+.trust-logos{display:grid; gap:18px; grid-template-columns:repeat(6, 1fr); align-items:center; opacity:.9}
+@media(max-width:860px){ .trust-logos{grid-template-columns:repeat(3, 1fr)} }
+.badge{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:white; font-weight:700}
+
+/* Footer */
+.site-footer{margin:40px 0 72px; padding-top:18px; border-top:1px solid var(--border); color:var(--muted)}
+
+/* Buttons and focus */
+:focus-visible{outline:2px solid var(--ring); outline-offset:2px}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; border:1px solid var(--border); border-radius:12px; background:var(--elev); color:var(--fg); text-decoration:none; white-space:nowrap}
+.btn.brand{background:linear-gradient(135deg,var(--brand),var(--brand-2)); border:none; color:white}
+
+
+/* Floating WhatsApp action */
+.wa-float{position:fixed; right:16px; bottom:16px; z-index:40; text-decoration:none; transition:opacity .25s ease}
+.wa-bubble{display:inline-flex; align-items:center; justify-content:center; width:54px; height:54px; border-radius:999px; background:linear-gradient(135deg,#25D366,#0db14b); color:white; font-weight:900; box-shadow:0 10px 30px rgba(0,0,0,.25)}
+@media (max-width:480px){ .wa-bubble{width:50px; height:50px} }
+
+
+/* Elegant theme refresh */
+:root{
+  --brand:#6b7cff;
+  --brand-2:#67e8f9;
+  --fg:#0f172a;
+  --bg:#f8fafc;
+  --elev:#ffffff;
+  --muted:#475569;
+  --card:#ffffff;
+  --border:rgba(15,23,42,.08);
+  --ring:rgba(107,124,255,.45);
+  --shadow:0 10px 40px rgba(2,8,23,.06);
+}
+[data-theme="dark"]{
+  --fg:#e2e8f0;
+  --bg:#0b0f19;
+  --elev:#0f1525;
+  --muted:#94a3b8;
+  --card:#111827;
+  --border:rgba(226,232,240,.08);
+  --shadow:0 10px 40px rgba(0,0,0,.35);
+}
+
+/* Make card links look like cards not blue links */
+.card{display:block; color:var(--fg); text-decoration:none}
+.card h3, .card p{color:inherit}
+.card:hover{transform:translateY(-1px); transition:transform .15s ease}
+
+/* Theme toggle look */
+.theme-toggle{background:var(--elev); color:var(--fg); border:1px solid var(--border)}
+
+/* Category grid spans so items are not squished */
+.category-grid > .card{grid-column: span 3}
+@media(max-width:640px){
+  .category-grid > .card{grid-column: span 2}
+}
+@media(max-width:480px){
+  .category-grid > .card{grid-column: span 2}
+}
+
+/* Extra spacing between title and grid */
+.section h2{margin-bottom:8px}

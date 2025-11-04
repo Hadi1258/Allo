@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+  <head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#5B8CFF">
+    <link rel="manifest" href="manifest.webmanifest"><link rel="preload" href="main.css" as="style"><link rel="stylesheet" href="main.css">
+    <title>Blog Post</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container navbar">
+        <div class="brand"><span class="brand-logo"></span><span>Allo Recharge</span></div>
+        <button class="menu-btn" data-menu aria-label="Menu">Menu</button>
+        <nav class="navlinks" aria-label="Main">
+          <a href="index.html">Home</a>
+          <a href="blog.html" aria-current="page">Blog</a>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">Theme</button>
+        </nav>
+      </div>
+    </header>
+    <main class="container section" style="padding-top:16px">
+      <article class="card" style="border-radius:var(--radius-lg)">
+        <h1 id="post-title">Loading</h1>
+        <p class="meta" style="color:var(--muted)" id="post-date"></p>
+        <div id="post-content" style="margin-top:8px"></div>
+      </article>
+    </main>
+    <footer class="site-footer"><div class="container"><p>© 2025 Allo Recharge</p></div></footer>
+    <script src="ui.js" defer></script>
+    <script src="md.js"></script>
+    <script>
+      (async function(){
+        const params = new URLSearchParams(location.search);
+        const slug = params.get('slug') || 'instant-topups';
+        const data = await renderMarkdownInto(document.getElementById('post-content'), slug);
+        document.getElementById('post-title').textContent = data.title || slug;
+        document.getElementById('post-date').textContent = data.date || '';
+      })();
+    </script>
+  </body>
+</html>

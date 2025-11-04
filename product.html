@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+  <head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#5B8CFF"><link rel="manifest" href="manifest.webmanifest">
+    <link rel="preload" href="main.css" as="style"><link rel="stylesheet" href="main.css">
+    <title>Product • Allo Recharge</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container navbar">
+        <div class="brand"><span class="brand-logo"></span><span>Allo Recharge</span></div>
+        <button class="menu-btn" data-menu aria-label="Menu">Menu</button>
+        <nav class="navlinks" aria-label="Main">
+          <a href="index.html">Home</a>
+          <a href="blog.html">Blog</a>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">Theme</button>
+        </nav>
+      </div>
+    </header>
+    <main class="container section" style="padding-top:16px">
+      <div class="grid grid-12">
+        <div class="card" style="grid-column: span 6">
+          <div style="aspect-ratio:4/3; border-radius:var(--radius); background:linear-gradient(135deg, var(--brand), var(--brand-2))"></div>
+        </div>
+        <div class="card" style="grid-column: span 6">
+          <h1 id="p-name">Product</h1>
+          <p style="color:var(--muted)">Digital delivery</p>
+          <div style="height:6px"></div>
+          <label>Variant</label>
+          <select id="p-variant" class="search-input" style="margin:6px 0 10px"></select>
+          <h2 id="p-price">USD 0.00</h2>
+          <div style="display:flex; gap:10px; margin-top:12px">
+            <button id="p-buy" class="btn brand">Add to cart</button>
+            <a class="btn" href="index.html">Continue shopping</a>
+          </div>
+        </div>
+        <div class="card" style="grid-column: span 12">
+          <h2>FAQ</h2>
+          <div id="p-faq" style="margin-top:8px"></div>
+        </div>
+      </div>
+    </main>
+    <footer class="site-footer"><div class="container"><p>© 2025 Allo Recharge</p></div></footer>
+    <script src="ui.js" defer></script>
+    <script src="product.js"></script>
+  </body>
+</html>

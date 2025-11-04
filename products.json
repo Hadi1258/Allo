@@ -1,0 +1,78 @@
+{
+  "products": [
+    {
+      "id": "mtc-credit",
+      "name": "MTC mobile credit",
+      "price": 5.0,
+      "currency": "USD",
+      "variants": [
+        {
+          "sku": "mtc-5",
+          "label": "Five USD",
+          "price": 5.0
+        },
+        {
+          "sku": "mtc-10",
+          "label": "Ten USD",
+          "price": 10.0
+        },
+        {
+          "sku": "mtc-25",
+          "label": "Twenty five USD",
+          "price": 25.0
+        }
+      ],
+      "faq": [
+        {
+          "q": "How fast is delivery",
+          "a": "Usually under one minute"
+        },
+        {
+          "q": "What numbers are supported",
+          "a": "All MTC lines in Lebanon"
+        },
+        {
+          "q": "Can I refund by mistake",
+          "a": "Contact support for quick help"
+        }
+      ]
+    },
+    {
+      "id": "steam-wallet",
+      "name": "Steam wallet code",
+      "price": 20.0,
+      "currency": "USD",
+      "variants": [
+        {
+          "sku": "steam-10",
+          "label": "Ten USD",
+          "price": 10.0
+        },
+        {
+          "sku": "steam-20",
+          "label": "Twenty USD",
+          "price": 20.0
+        },
+        {
+          "sku": "steam-50",
+          "label": "Fifty USD",
+          "price": 50.0
+        }
+      ],
+      "faq": [
+        {
+          "q": "Region lock",
+          "a": "Make sure the region matches your account"
+        },
+        {
+          "q": "How to redeem",
+          "a": "Use Steam redeem in client or web"
+        },
+        {
+          "q": "Does it expire",
+          "a": "Codes do not expire"
+        }
+      ]
+    }
+  ]
+}
